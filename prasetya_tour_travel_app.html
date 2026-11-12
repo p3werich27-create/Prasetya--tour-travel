@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102b46">
+<title>Prasetya Tour and Travel</title>
+<style>
+:root{--navy:#102b46;--blue:#1d527d;--gold:#d8ad55;--pale:#f3f6fa;--ink:#182638;--muted:#6d7b8c;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--pale);color:var(--ink)}
+header{background:linear-gradient(120deg,#102b46,#1d527d);color:white;padding:24px 18px 20px}
+.wrap{max-width:1050px;margin:auto} .brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:21px}
+h1{font-size:22px;margin:0}header p{margin:4px 0 0;color:#dbe7f1;font-size:13px}.tag{color:#f1d28c;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;margin-top:15px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:0;padding:10px 15px;border-radius:10px;background:white;color:var(--navy);font-weight:700;cursor:pointer}.tab.active{background:var(--navy);color:white}
+main{max-width:1050px;margin:auto;padding:0 16px 35px}.hero{background:white;border-radius:18px;padding:22px;margin:14px 0;box-shadow:0 5px 18px #102b4610}.hero h2{margin:0 0 5px;font-size:23px;color:var(--navy)}.hero p{margin:0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.card{background:white;border-radius:16px;padding:17px;box-shadow:0 4px 15px #102b460b;border:1px solid #e6ebf1}.emoji{font-size:30px;background:#edf3f8;border-radius:12px;width:54px;height:54px;display:grid;place-items:center}.card h3{margin:12px 0 4px;color:var(--navy)}.muted{color:var(--muted);font-size:13px}.price{font-size:20px;font-weight:800;color:#9a7123;margin:10px 0}
+button,.btn{cursor:pointer;border:0;border-radius:10px;background:var(--blue);color:white;font-weight:700;padding:10px 14px;text-decoration:none;display:inline-block}.secondary{background:#e9eff5;color:var(--navy)}.gold{background:var(--gold);color:var(--navy)}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+label{display:block;font-size:13px;font-weight:700;margin:11px 0 5px;color:#33475c}input,select,textarea{width:100%;padding:11px;border:1px solid #d6e0e9;border-radius:9px;background:white;font:inherit}textarea{min-height:78px;resize:vertical}.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}.panel{background:white;border-radius:16px;padding:18px;margin:12px 0}.hidden{display:none}.stat{background:#edf3f8;border-radius:12px;padding:13px;flex:1;min-width:120px}.stat strong{font-size:24px;color:var(--navy);display:block}.booking{border:1px solid #e3eaf0;border-radius:12px;padding:13px;margin:10px 0}.booking h3{margin:0;color:var(--navy)}.footer{text-align:center;color:var(--muted);padding:20px;font-size:12px}
+.notice{background:#fff5dc;border:1px solid #f1dfaa;border-radius:12px;padding:12px;font-size:13px;color:#73551a;margin:12px 0}
+@media(min-width:700px){header{padding:28px 24px}main{padding:0 24px 40px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="brand"><div class="logo">PT</div><div><h1>Prasetya Tour and Travel</h1><p>Perjalanan nyaman, layanan terpercaya</p></div></div>
+<div class="tag">Comfortly Priority</div>
+</div></header>
+<main>
+<nav>
+<button class="tab active" data-tab="home">Beranda</button><button class="tab" data-tab="packages">Paket Wisata</button><button class="tab" data-tab="booking">Pesan Perjalanan</button><button class="tab" data-tab="admin">Panel Kantor</button><button class="tab" data-tab="settings">Pengaturan</button>
+</nav>
+<section id="home">
+<div class="hero"><h2>Jelajahi perjalanan bersama Prasetya</h2><p>Paket wisata sekolah, keluarga, dan rombongan. Pilih perjalanan, isi permintaan pemesanan, lalu kantor Prasetya dapat menindaklanjuti.</p><div class="row" style="margin-top:15px"><button class="gold" onclick="show('packages')">Lihat Paket Wisata</button><button class="secondary" onclick="show('booking')">Ajukan Pemesanan</button></div></div>
+<div class="grid" id="homeCards"></div>
+</section>
+<section id="packages" class="hidden"><div class="hero"><h2>Paket Wisata</h2><p>Contoh paket awal—harga dan rincian bisa Mbah sesuaikan di Panel Kantor.</p></div><div class="grid" id="packageCards"></div></section>
+<section id="booking" class="hidden"><div class="panel"><h2 style="color:var(--navy);margin-top:0">Formulir Pemesanan</h2><p class="muted">Isi data perjalanan. Permintaan tersimpan di perangkat/browser ini.</p>
+<form id="bookForm"><div class="formgrid">
+<div><label>Nama pemesan *</label><input name="name" required placeholder="Nama lengkap"></div>
+<div><label>Nomor HP/WhatsApp *</label><input name="phone" required type="tel" placeholder="08xxxxxxxxxx"></div>
+<div><label>Nama sekolah/rombongan</label><input name="group" placeholder="Nama instansi (opsional)"></div>
+<div><label>Pilih paket *</label><select name="package" id="bookPackage" required></select></div>
+<div><label>Tanggal berangkat *</label><input name="date" type="date" required></div>
+<div><label>Jumlah peserta *</label><input name="people" type="number" min="1" required placeholder="Jumlah orang"></div>
+</div><label>Tujuan / permintaan tambahan</label><textarea name="notes" placeholder="Destinasi, titik jemput, kebutuhan khusus…"></textarea><div class="row" style="margin-top:14px"><button type="submit">Simpan Permintaan</button><button type="button" class="secondary" onclick="show('packages')">Kembali ke Paket</button></div></form><div id="bookMsg"></div></div></section>
+<section id="admin" class="hidden"><div class="hero"><h2>Panel Kantor Prasetya</h2><p>Pengelolaan pemesanan dan paket yang tersimpan lokal di browser ini.</p></div>
+<div class="row" id="stats"></div>
+<div class="panel"><div class="row" style="justify-content:space-between"><h2 style="margin:0;color:var(--navy)">Daftar Permintaan</h2><button class="secondary" onclick="exportBookings()">Ekspor CSV</button></div><div id="bookingList"></div></div>
+<div class="panel"><h2 style="margin-top:0;color:var(--navy)">Tambah / Perbarui Paket</h2><form id="packageForm"><div class="formgrid"><div><label>Nama paket</label><input name="title" required placeholder="Contoh: Wisata edukasi"></div><div><label>Destinasi</label><input name="destination" required placeholder="Nama tujuan"></div><div><label>Harga per orang (Rp)</label><input name="price" type="number" min="0" required placeholder="Harga"></div><div><label>Ikon/emoji</label><input name="emoji" value="🚌" maxlength="5"></div></div><label>Deskripsi</label><textarea name="description" placeholder="Rincian singkat paket"></textarea><button type="submit" style="margin-top:12px">Simpan Paket</button></form><div id="packageAdminList"></div></div>
+</section>
+<section id="settings" class="hidden"><div class="panel"><h2 style="margin-top:0;color:var(--navy)">Pengaturan Identitas</h2><p class="muted">Masukkan nomor WhatsApp kantor agar tombol kontak/pesan bisa diarahkan. Gunakan format kode negara, misalnya 62812xxxx (tanpa +).</p><label>WhatsApp Prasetya</label><input id="waNumber" placeholder="628xxxxxxxxxx"><label>Alamat kantor</label><input id="officeAddress" value="Perum Omah Kweni, Anggaswangi, Sukodono, Sidoarjo"><label>Tagline</label><input id="tagline" value="Comfortly Priority"><button onclick="saveSettings()" style="margin-top:13px">Simpan Pengaturan</button><div id="settingsMsg" class="muted"></div></div>
+<div class="notice"><strong>Catatan, Mbah:</strong> versi ini merupakan aplikasi prototipe lokal yang bisa dicoba di HP. Data pesanan tersimpan hanya pada browser/perangkat ini, belum otomatis masuk ke HP pelanggan atau server online. Untuk aplikasi publik dan sinkron antarperangkat, perlu tahap hosting dan backend.</div></section>
+<div class="footer">Prasetya Tour and Travel · Comfortly Priority</div>
+</main>
+<script>
+const starter=[{id:1,title:"Wisata Edukasi Sekolah",destination:"Destinasi edukasi pilihan",price:150000,emoji:"🎒",description:"Cocok untuk rombongan SD/MI dan kegiatan belajar di luar kelas."},{id:2,title:"Wisata Keluarga",destination:"Wisata alam dan rekreasi",price:200000,emoji:"🌿",description:"Perjalanan santai untuk keluarga dan rombongan kecil."},{id:3,title:"Wisata Rombongan",destination:"Tujuan sesuai permintaan",price:175000,emoji:"🚌",description:"Paket fleksibel untuk komunitas, kantor, dan rombongan."}];
+let packages=JSON.parse(localStorage.getItem("pt_packages")||"null")||starter;
+let bookings=JSON.parse(localStorage.getItem("pt_bookings")||"[]");
+let settings=JSON.parse(localStorage.getItem("pt_settings")||"{}");
+function persist(){localStorage.setItem("pt_packages",JSON.stringify(packages));localStorage.setItem("pt_bookings",JSON.stringify(bookings))}
+function rupiah(n){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Number(n)||0)}
+function show(id){document.querySelectorAll("main>section").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));if(id==="admin")renderAdmin();if(id==="booking")renderSelect()}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>show(b.dataset.tab)));
+function card(p){return `<article class="card"><div class="emoji">${p.emoji||"🚌"}</div><h3>${esc(p.title)}</h3><div class="muted">📍 ${esc(p.destination)}</div><p class="muted">${esc(p.description||"Paket perjalanan Prasetya.")}</p><div class="price">${rupiah(p.price)} <span class="muted">/ orang (estimasi)</span></div><button onclick="choosePackage(${p.id})">Pesan Paket</button></article>`}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderPackages(){document.getElementById("packageCards").innerHTML=packages.map(card).join("");document.getElementById("homeCards").innerHTML=packages.slice(0,3).map(card).join("");renderSelect()}
+function choosePackage(id){show("booking");document.getElementById("bookPackage").value=String(id)}
+function renderSelect(){document.getElementById("bookPackage").innerHTML=packages.map(p=>`<option value="${p.id}">${esc(p.title)} — ${rupiah(p.price)}/orang</option>`).join("")}
+document.getElementById("bookForm").addEventListener("submit",e=>{e.preventDefault();let d=Object.fromEntries(new FormData(e.target));let p=packages.find(x=>x.id===Number(d.package));bookings.unshift({id:Date.now(),...d,packageTitle:p?.title||"Paket",price:p?.price||0,status:"Baru",created:new Date().toLocaleString("id-ID")});persist();e.target.reset();renderSelect();document.getElementById("bookMsg").innerHTML='<div class="notice">Permintaan tersimpan di perangkat ini. Silakan hubungi kantor untuk konfirmasi ketersediaan dan harga final.</div>';});
+function renderAdmin(){document.getElementById("stats").innerHTML=`<div class="stat"><span class="muted">Jumlah permintaan</span><strong>${bookings.length}</strong></div><div class="stat"><span class="muted">Paket aktif</span><strong>${packages.length}</strong></div><div class="stat"><span class="muted">Status baru</span><strong>${bookings.filter(b=>b.status==="Baru").length}</strong></div>`;document.getElementById("bookingList").innerHTML=bookings.length?bookings.map(b=>`<div class="booking"><div class="row" style="justify-content:space-between"><h3>${esc(b.name)} · ${esc(b.packageTitle)}</h3><span class="muted">${esc(b.created)}</span></div><div class="muted">HP: ${esc(b.phone)} | Rombongan: ${esc(b.group||"-")} | Tanggal: ${esc(b.date)} | Peserta: ${esc(b.people)}</div><p>${esc(b.notes||"Tidak ada catatan")}</p><div class="row"><select onchange="statusBooking(${b.id},this.value)" style="max-width:180px"><option ${b.status==="Baru"?"selected":""}>Baru</option><option ${b.status==="Dihubungi"?"selected":""}>Dihubungi</option><option ${b.status==="Dikonfirmasi"?"selected":""}>Dikonfirmasi</option><option ${b.status==="Batal"?"selected":""}>Batal</option></select><button class="secondary" onclick="deleteBooking(${b.id})">Hapus</button></div></div>`).join(""):'<p class="muted">Belum ada permintaan pemesanan.</p>';document.getElementById("packageAdminList").innerHTML=packages.map(p=>`<div class="booking"><strong>${esc(p.title)}</strong> — ${rupiah(p.price)} <button class="secondary" onclick="deletePackage(${p.id})">Hapus paket</button></div>`).join("")}
+function statusBooking(id,v){let b=bookings.find(x=>x.id===id);if(b)b.status=v;persist();renderAdmin()}
+function deleteBooking(id){if(confirm("Hapus permintaan ini?")){bookings=bookings.filter(x=>x.id!==id);persist();renderAdmin()}}
+function deletePackage(id){if(confirm("Hapus paket ini?")){packages=packages.filter(x=>x.id!==id);persist();renderPackages();renderAdmin()}}
+document.getElementById("packageForm").addEventListener("submit",e=>{e.preventDefault();let d=Object.fromEntries(new FormData(e.target));packages.push({id:Date.now(),title:d.title,destination:d.destination,price:Number(d.price),emoji:d.emoji||"🚌",description:d.description});persist();e.target.reset();renderPackages();renderAdmin()});
+function exportBookings(){let rows=[["Nama","HP","Rombongan","Paket","Tanggal","Peserta","Catatan","Status"],...bookings.map(b=>[b.name,b.phone,b.group,b.packageTitle,b.date,b.people,b.notes,b.status])];let csv=rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");let blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="pemesanan-prasetya.csv";a.click();URL.revokeObjectURL(a.href)}
+function saveSettings(){settings={waNumber:document.getElementById("waNumber").value.trim(),officeAddress:document.getElementById("officeAddress").value.trim(),tagline:document.getElementById("tagline").value.trim()};localStorage.setItem("pt_settings",JSON.stringify(settings));document.getElementById("settingsMsg").textContent="Pengaturan tersimpan di browser ini."}
+document.getElementById("waNumber").value=settings.waNumber||"";document.getElementById("officeAddress").value=settings.officeAddress||"Perum Omah Kweni, Anggaswangi, Sukodono, Sidoarjo";document.getElementById("tagline").value=settings.tagline||"Comfortly Priority";
+renderPackages();
+</script>
+</body></html>
